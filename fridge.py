@@ -15,8 +15,15 @@ def add(items, title, amount, expiration_date=None):
     batch = {'amount': Decimal(amount), 'expiration_date': parsed_date}
     items[title].append(batch)
 
-add(goods, 'Пельмени Универсальные', 0.5, '2023-7-15')
-add(goods, 'Пельмени Универсальные', 2, '2023-8-1')
-add(goods, 'Вода', 1.5)
-print(goods)    
-    
+
+def add_by_note(items, note):
+    parts = note.strip().split()
+    if len(parts[-1].split('-')) == 3:
+        expiration_date = parts[-1]
+        amount = Decimal(parts[-2])
+        title = ' '.join(parts[:-2])
+    else:
+        expiration_date = None
+        amount = Decimal(parts[-1])
+        title = ' '.join(parts[:-1])
+    add(goods, title, amount, expiration_date)
