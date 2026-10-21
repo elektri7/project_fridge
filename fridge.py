@@ -27,3 +27,11 @@ def add_by_note(items, note):
         amount = Decimal(parts[-1])
         title = ' '.join(parts[:-1])
     add(goods, title, amount, expiration_date)
+
+
+def find(items, needle):
+    result = []
+    for key in items:
+        if needle.strip().lower() in key.lower():
+            result.append(key)
+    return result
