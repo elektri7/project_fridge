@@ -1,7 +1,6 @@
 from datetime import datetime
 from decimal import Decimal
 
-
 goods = {}
 DATE_FORMAT = '%Y-%m-%d'
 
@@ -35,3 +34,12 @@ def find(items, needle):
         if needle.strip().lower() in key.lower():
             result.append(key)
     return result
+
+
+def get_amount(items, needle):
+    product_amount = Decimal(0)
+    for title in find(items, needle):
+        for batch in goods[title]:
+            if 'amount' in batch:
+                product_amount += batch['amount']
+    return product_amount
